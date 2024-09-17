@@ -1,3 +1,4 @@
+import { PostGenerator } from './types';
 import moment from 'moment';
 import type default_config from './hexo/default_config';
 import type Query from 'warehouse/dist/query';
@@ -217,7 +218,7 @@ export interface AssetGenerator {
     data?: () => any;
   }
 }
-
+/*
 export type SimplePostGenerator = {
   path: string;
   data: string;
@@ -240,6 +241,18 @@ export type NormalPageGenerator = {
   data: PageSchema;
 }
 export type PageGenerator = SimplePageGenerator | NormalPageGenerator;
+*/
+export interface SimpleGenerator {
+  path: string;
+  data: string;
+}
+export interface NormalGenerator <dato> {
+  path : string;
+  layout : string[];
+  data : dato;
+}
+export type PostGenerator = SimpleGenerator | NormalGenerator<PostSchema>;
+export type PageGenerator = SimpleGenerator | NormalGenerator<PageSchema>;
 
 export interface SiteLocals {
   posts: Query<PostSchema>; // _Query
